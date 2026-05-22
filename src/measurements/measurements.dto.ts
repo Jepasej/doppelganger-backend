@@ -1,5 +1,5 @@
 export class MeasurementDto {
   citizenId: string;
-  type: 'heartRate' | 'temperature';
+  type: 'heartRate' | 'spo2';
   value: number;
 }

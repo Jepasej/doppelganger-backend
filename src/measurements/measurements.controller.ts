@@ -1,11 +1,16 @@
 // src/measurements/measurements.controller.ts
-import { Controller, Sse, MessageEvent } from '@nestjs/common';
+import { Body, Controller, Sse, MessageEvent, Post } from '@nestjs/common';
 import { MeasurementsService } from './measurements.service';
 import { fromEvent, map, Observable } from 'rxjs';
 
 @Controller('measurements')
 export class MeasurementsController {
   constructor(private readonly measurementsService: MeasurementsService) {}
+
+  @Post()
+  createMeasurement(@Body() body: any) {
+    return this.measurementsService.handleNewMeasurement(body);
+  }
 
   // The Flutter mobile framework establishes a persistent tracking channel here
   @Sse('critical')

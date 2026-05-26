@@ -7,11 +7,13 @@ import { fromEvent, map, Observable } from 'rxjs';
 export class MeasurementsController {
   constructor(private readonly measurementsService: MeasurementsService) {}
 
+  // TODO 8 endpoint is only for testing, delete
   @Post()
   createMeasurement(@Body() body: any) {
     return this.measurementsService.handleNewMeasurement(body);
   }
 
+  // TODO 9 remove console.log
   // The Flutter mobile framework establishes a persistent tracking channel here
   @Sse('critical')
   streamCriticalAlarms(): Observable<MessageEvent> {

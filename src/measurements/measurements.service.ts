@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventEmitter } from 'events';
 // import { MeasurementDto } from './measurements.dto';
 
-// TODO 3 this DTO must be deleted - we should use the measurement dto as defined in ./measurements.dto.ts.
+// TODO 3A this DTO must be deleted - we should use the measurement dto as defined in ./measurements.dto.ts.
 // ./measurements.dto.ts must be changed to line up with our needs and comment in the above
 type TestMeasurementDto = {
   citizenId: string;

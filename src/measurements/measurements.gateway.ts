@@ -7,6 +7,7 @@ import { Server } from 'socket.io';
 import { MeasurementsService } from './measurements.service';
 import { MeasurementDto } from './measurements.dto';
 
+// TODO 10 bruger vi overhovedet denne gateway? Jeg tror ikke den bruges. Maaske kan vi bare slette hele denne fil?
 @WebSocketGateway({
   cors: {
     origin: '*',

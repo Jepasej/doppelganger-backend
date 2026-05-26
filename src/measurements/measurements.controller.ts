@@ -13,13 +13,14 @@ export class MeasurementsController {
     return this.measurementsService.handleNewMeasurement(body);
   }
 
-  // TODO 9 remove console.log
+  // TODO 9 remove console.log everywhere!
   // The Flutter mobile framework establishes a persistent tracking channel here
   @Sse('critical')
   streamCriticalAlarms(): Observable<MessageEvent> {
     console.log(
       '[SSE Engine] Flutter client established a live stream channel hook',
     );
+
 
     // 'fromEvent' listens to our service's node event emitter instance.
     // Every time 'this.eventEmitter.emit("critical-alarm")' triggers, it intercepts it here.

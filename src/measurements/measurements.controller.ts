@@ -21,7 +21,6 @@ export class MeasurementsController {
       '[SSE Engine] Flutter client established a live stream channel hook',
     );
 
-
     // 'fromEvent' listens to our service's node event emitter instance.
     // Every time 'this.eventEmitter.emit("critical-alarm")' triggers, it intercepts it here.
     return fromEvent(

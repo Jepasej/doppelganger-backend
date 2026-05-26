@@ -14,6 +14,7 @@ export class MeasurementsController {
   }
 
   // TODO 9 remove console.log everywhere!
+  // TODO 10B Alternativt tror jeg det er mere "nestjs" at ligge dette ind i en gateway, men maaske skal vi spoerge Tommy?
   // The Flutter mobile framework establishes a persistent tracking channel here
   @Sse('critical')
   streamCriticalAlarms(): Observable<MessageEvent> {

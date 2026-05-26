@@ -1,4 +1,3 @@
-// authentication.controller.ts
 import {
   Controller,
   Post,

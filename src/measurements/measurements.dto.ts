@@ -1,6 +1,7 @@
-// TODO 3B UPDATE
+// DTO for incoming measurements from Raspberry Pi.
 export class MeasurementDto {
   citizenId: string;
-  type: 'heartRate' | 'spo2';
-  value: number;
+  pulse: number;
+  spo2: number;
+  createdAt?: string;
 }

@@ -7,6 +7,7 @@ import {
 import * as net from 'net';
 import { MeasurementsService } from '../measurements/measurements.service';
 
+// TODO 1 delete logger and all uses of it to keep code slim and focused on core functionality, unless you think it's useful for debugging or future maintenance.
 @Injectable()
 export class TcpListenerService implements OnModuleInit, OnModuleDestroy {
   private server: net.Server;
@@ -37,6 +38,7 @@ export class TcpListenerService implements OnModuleInit, OnModuleDestroy {
     );
     this.bufferMap.set(socket, '');
 
+    // TODO 2 what is this, and is it necessary? Ask an llm
     socket.on('data', (chunk: Buffer) => {
       const prev = this.bufferMap.get(socket) || '';
       const combined = prev + chunk.toString('utf8');
@@ -49,7 +51,7 @@ export class TcpListenerService implements OnModuleInit, OnModuleDestroy {
         if (!line.trim()) continue;
         try {
           const payload = JSON.parse(line);
-          // Map payload to TestMeasurementDto expected by MeasurementsService
+          // TODO 4 Map payload to MeasurementDto expected by MeasurementsService
           // Adjust mapping to match your Pi payload shape
           const mapped = {
             citizenId: String(payload.citizenId ?? payload.id ?? 'unknown'),

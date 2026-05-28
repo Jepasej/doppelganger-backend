@@ -7,11 +7,14 @@ import { fromEvent, map, Observable } from 'rxjs';
 export class MeasurementsController {
   constructor(private readonly measurementsService: MeasurementsService) {}
 
+  // TODO 8 endpoint is only for testing, delete
   @Post()
   createMeasurement(@Body() body: any) {
     return this.measurementsService.handleNewMeasurement(body);
   }
 
+  // TODO 9 remove console.log everywhere!
+  // TODO 10B Alternativt tror jeg det er mere "nestjs" at ligge dette ind i en gateway, men maaske skal vi spoerge Tommy?
   // The Flutter mobile framework establishes a persistent tracking channel here
   @Sse('critical')
   streamCriticalAlarms(): Observable<MessageEvent> {

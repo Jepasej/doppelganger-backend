@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { EventEmitter } from 'events';
 // import { MeasurementDto } from './measurements.dto';
 
+// TODO 3A this DTO must be deleted - we should use the measurement dto as defined in ./measurements.dto.ts.
+// ./measurements.dto.ts must be changed to line up with our needs and comment in the above
 type TestMeasurementDto = {
   citizenId: string;
   citizenName: string;
@@ -10,59 +12,20 @@ type TestMeasurementDto = {
   spo2: number;
 };
 
+// TODO 5 remove all console logging.
 @Injectable()
 export class MeasurementsService {
   public readonly eventEmitter = new EventEmitter();
 
-  /*
-    ============================================================
-    ORIGINAL KODE - UDKOMMENTERET MENS VI TESTER SSE
-    ============================================================
-  
-    private readonly bounds = {
-      heartRate: { min: 60, max: 100 },
-      temperature: { min: 36.0, max: 37.5 },
-    };
-  
-    async handleNewMeasurement(data: MeasurementDto) {
-      console.log(
-        `[Database] Saved to Redis -> Citizen: ${data.citizenId}, ${data.type}: ${data.value}`,
-      );
-  
-      const limits = this.bounds[data.type];
-      if (!limits) return;
-  
-      const isBelowMinimum = data.value < limits.min;
-      const isAboveMaximum = data.value > limits.max;
-  
-      if (isBelowMinimum || isAboveMaximum) {
-        const condition = isBelowMinimum ? 'LOW' : 'HIGH';
-  
-        this.eventEmitter.emit('critical-alarm', {
-          citizenId: data.citizenId,
-          type: data.type,
-          value: data.value,
-          timestamp: new Date().toISOString(),
-          message: `CRITICAL ${condition}: ${data.type} is ${data.value}. Normal parameters: ${limits.min}-${limits.max}`,
-          alarm: true,
-        });
-  
-        console.log(
-          `[Alarm Engine] 🚨 Event emitted for Citizen ${data.citizenId}`,
-        );
-      }
-    }
-  
-    ============================================================
-    TEST-KODE - BRUGES KUN TIL AT TESTE SSE MOD FLUTTER
-    ============================================================
-    */
-
   handleNewMeasurement(data: TestMeasurementDto) {
     console.log('[TEST] Measurement received:', data);
 
-    const isCritical = data.pulse > 120 || data.spo2 < 90;
+    // TODO 6 define actual critical thresholds.
+    const isCritical = data.pulse > 120 || data.pulse || data.spo2 < 90;
 
+    // TODO 7 We receive a timestamp from the Pi, we should use that instead of generating a new one here.
+    // also this measurement is like all wrong pls fix (measurement --> database --> frontend, measurement
+    // will be slightly delayed in UI compared to alarm, we have to live with it)
     const measurement = {
       id: crypto.randomUUID(),
       citizenId: data.citizenId,

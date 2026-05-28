@@ -1,4 +1,3 @@
-// authentication.module.ts
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -7,6 +6,7 @@ import { AuthenticationController } from './authentication.controller';
 import { AuthenticationService } from './authentication.service';
 import { JwtStrategy } from './jwt.strategy';
 
+// Vi skal have en konsulent til at forklare hele vores authentication struktur
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),

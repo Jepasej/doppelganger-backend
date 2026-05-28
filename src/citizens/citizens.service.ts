@@ -7,13 +7,13 @@ export class CitizensService {
       {
         id: '1',
         fullName: 'Anna Jensen',
-        adress: 'Hovedgaden 12',
+        address: 'Hovedgaden 12',
         phoneNumber: '12345678',
       },
       {
         id: '2',
         fullName: 'Peter Hansen',
-        adress: 'Søndergade 34',
+        address: 'Søndergade 34',
         phoneNumber: '87654321',
       },
     ];

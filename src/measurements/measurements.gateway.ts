@@ -1,4 +1,4 @@
-import {
+/*import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
@@ -38,7 +38,8 @@ export class MeasurementsGateway {
     ============================================================
     */
 
-  @SubscribeMessage('send-measurement')
+/*
+@SubscribeMessage('send-measurement')
   handleMeasurement(payload: MeasurementDto) {
     console.log('[TEST] Incoming websocket measurement:', payload);
 
@@ -60,3 +61,4 @@ export class MeasurementsGateway {
     this.server.emit('measurement-received', payload);
   }
 }
+*/

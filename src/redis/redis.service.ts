@@ -57,7 +57,7 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     );
   }
 
-  // Stores the latest measurements in a Redis LIST.
+  // Insert a new measurement at the beginning of the List
   async addLatestMeasurement(measurement: Measurement): Promise<void> {
     await this.redisClient.lPush(
       this.LATEST_MEASUREMENTS_KEY,

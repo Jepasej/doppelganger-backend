@@ -13,15 +13,9 @@ export class MeasurementsController {
     return this.measurementsService.handleNewMeasurement(body);
   }
 
-  // TODO 9 remove console.log everywhere!
-  // TODO 10B Alternativt tror jeg det er mere "nestjs" at ligge dette ind i en gateway, men maaske skal vi spoerge Tommy?
   // The Flutter mobile framework establishes a persistent tracking channel here
   @Sse('critical')
   streamCriticalAlarms(): Observable<MessageEvent> {
-    console.log(
-      '[SSE Engine] Flutter client established a live stream channel hook',
-    );
-
     // 'fromEvent' listens to our service's node event emitter instance.
     // Every time 'this.eventEmitter.emit("critical-alarm")' triggers, it intercepts it here.
     return fromEvent(

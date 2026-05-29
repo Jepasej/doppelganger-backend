@@ -6,8 +6,8 @@ import {
 } from '@nestjs/common';
 import * as net from 'net';
 import { MeasurementsService } from '../measurements/measurements.service';
+import { MeasurementDto } from '../measurements/measurements.dto';
 
-// TODO 1 delete logger and all uses of it to keep code slim and focused on core functionality, unless you think it's useful for debugging or future maintenance.
 @Injectable()
 export class TcpListenerService implements OnModuleInit, OnModuleDestroy {
   private server: net.Server;
@@ -21,11 +21,14 @@ export class TcpListenerService implements OnModuleInit, OnModuleDestroy {
     const host = process.env.TCP_HOST || '0.0.0.0';
 
     this.server = net.createServer((socket) => this.onConnection(socket));
+
     this.server.listen(port, host, () => {
       this.logger.log(`TCP listener running on ${host}:${port}`);
     });
 
-    this.server.on('error', (err) => this.logger.error('Server error', err));
+    this.server.on('error', (err) => {
+      this.logger.error('Server error', err);
+    });
   }
 
   onModuleDestroy() {
@@ -36,38 +39,43 @@ export class TcpListenerService implements OnModuleInit, OnModuleDestroy {
     this.logger.log(
       `New TCP connection from ${socket.remoteAddress}:${socket.remotePort}`,
     );
+
     this.bufferMap.set(socket, '');
 
-    // TODO 2 what is this, and is it necessary? Ask an llm
     socket.on('data', (chunk: Buffer) => {
-      const prev = this.bufferMap.get(socket) || '';
-      const combined = prev + chunk.toString('utf8');
-      const parts = combined.split('\n');
+      const previousData = this.bufferMap.get(socket) || '';
+      const combinedData = previousData + chunk.toString('utf8');
+      const messages = combinedData.split('\n');
 
-      // last item may be incomplete — keep in buffer
-      this.bufferMap.set(socket, parts.pop() || '');
+      // TCP data may arrive in multiple chunks.
+      // Store any incomplete JSON message in the buffer
+      // until the remaining data arrives.
+      this.bufferMap.set(socket, messages.pop() || '');
 
-      for (const line of parts) {
-        if (!line.trim()) continue;
+      for (const message of messages) {
+        if (!message.trim()) continue;
+
         try {
-          const payload = JSON.parse(line);
-          // TODO 4 Map payload to MeasurementDto expected by MeasurementsService
-          // Adjust mapping to match your Pi payload shape
-          const mapped = {
+          const payload = JSON.parse(message);
+
+          // Map incoming Raspberry Pi measurements to the DTO
+          // used by the MeasurementsService. Citizen information
+          // is looked up later using the citizenId.
+          const measurementDto: MeasurementDto = {
             citizenId: String(payload.citizenId ?? payload.id ?? 'unknown'),
-            citizenName: String(
-              payload.citizenName ?? payload.name ?? 'unknown',
-            ),
-            citizenPhoneNumber: String(
-              payload.citizenPhoneNumber ?? payload.phoneNumber ?? '',
-            ),
             pulse: Number(payload.pulse ?? payload.value ?? 0),
             spo2: Number(payload.spo2 ?? 0),
           };
-          this.measurementsService.handleNewMeasurement(mapped);
+
+          this.measurementsService.handleNewMeasurement(measurementDto);
+
           socket.write('OK\n');
         } catch (err) {
-          this.logger.error('Failed to parse/handle TCP payload', err as Error);
+          this.logger.error(
+            'Failed to parse or handle TCP payload',
+            err as Error,
+          );
+
           socket.write('ERROR\n');
         }
       }
@@ -75,6 +83,7 @@ export class TcpListenerService implements OnModuleInit, OnModuleDestroy {
 
     socket.on('close', () => {
       this.bufferMap.delete(socket);
+
       this.logger.log(
         `Connection closed ${socket.remoteAddress}:${socket.remotePort}`,
       );

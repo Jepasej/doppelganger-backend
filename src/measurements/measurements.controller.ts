@@ -2,14 +2,16 @@
 import { Body, Controller, Sse, MessageEvent, Post } from '@nestjs/common';
 import { MeasurementsService } from './measurements.service';
 import { fromEvent, map, Observable } from 'rxjs';
+import { MeasurementDto } from './measurements.dto';
 
 @Controller('measurements')
 export class MeasurementsController {
   constructor(private readonly measurementsService: MeasurementsService) {}
 
-  // TODO 8 endpoint is only for testing, delete
+  // Optional test endpoint for manually submitting measurements.
+  // Not used by Raspberry Pi communication.
   @Post()
-  createMeasurement(@Body() body: any) {
+  createMeasurement(@Body() body: MeasurementDto) {
     return this.measurementsService.handleNewMeasurement(body);
   }
 

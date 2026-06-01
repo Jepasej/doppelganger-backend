@@ -1,1 +1,102 @@
-[]
+[
+  {
+    "id": "c3df0a0b-230c-499a-be19-7241a3cb9171",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 48,
+    "spo2": 83,
+    "createdAt": "2026-06-01T07:27:31.429Z",
+    "isCritical": true
+  },
+  {
+    "id": "71dd3485-dd88-4b89-b590-36afcddd3c8b",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 66,
+    "spo2": 83,
+    "createdAt": "2026-06-01T07:27:33.447Z",
+    "isCritical": true
+  },
+  {
+    "id": "e70f17a9-007c-49a4-adbd-dd8da8243590",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 102,
+    "spo2": 96,
+    "createdAt": "2026-06-01T07:27:35.473Z",
+    "isCritical": false
+  },
+  {
+    "id": "6e3befb4-12e8-4077-9910-c1e4b2f23c2c",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 108,
+    "spo2": 0,
+    "createdAt": "2026-06-01T07:27:37.495Z",
+    "isCritical": true
+  },
+  {
+    "id": "1b9446a5-261d-4efe-9e0f-347cdcb2cc85",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 95,
+    "spo2": 0,
+    "createdAt": "2026-06-01T07:27:39.518Z",
+    "isCritical": true
+  },
+  {
+    "id": "d445e9a7-4234-4272-83c0-1a15a80194ce",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 56,
+    "spo2": 90,
+    "createdAt": "2026-06-01T07:29:31.256Z",
+    "isCritical": false
+  },
+  {
+    "id": "4c67019d-1760-4c24-9dee-e637e2ae3602",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 54,
+    "spo2": 98,
+    "createdAt": "2026-06-01T07:29:33.278Z",
+    "isCritical": false
+  },
+  {
+    "id": "b8f9236f-4c54-4d2b-937e-a432b7f90d5e",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 58,
+    "spo2": 0,
+    "createdAt": "2026-06-01T07:29:35.302Z",
+    "isCritical": true
+  },
+  {
+    "id": "38cbe867-5bf9-461d-a532-d2d223abad57",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 79,
+    "spo2": 88,
+    "createdAt": "2026-06-01T07:29:37.326Z",
+    "isCritical": true
+  },
+  {
+    "id": "a2c11e9b-acc1-4ed0-916a-c8a49058734c",
+    "citizenId": "1",
+    "citizenName": "Anna Jensen",
+    "citizenPhoneNumber": "12345678",
+    "pulse": 77,
+    "spo2": 89,
+    "createdAt": "2026-06-01T07:29:39.350Z",
+    "isCritical": true
+  }
+]

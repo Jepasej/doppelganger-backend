@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { LoginDto } from './dto/login.dto';
 
 export interface JwtPayload {
   sub: string; // User ID
@@ -35,15 +36,11 @@ export class AuthenticationService {
   }
 
   // 2. Validate a User Login
-  async login(loginDto: any) {
-    // Perform your DB user lookup and password verification step here
-    // const user = await this.userService.validate(loginDto);
-
-    // Mock user data matching your requirements
+  async login(loginDto: LoginDto) {
     const mockPayload: JwtPayload = {
       sub: 'user_uuid_12345',
       email: loginDto.email || 'student@exam.com',
-      roles: ['admin'], // Populated array strings representing user roles
+      roles: ['nurse'], // Populated array strings representing user roles
     };
 
     return this.generateTokens(mockPayload);

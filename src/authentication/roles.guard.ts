@@ -1,4 +1,6 @@
-// roles.guard.ts
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   CanActivate,
   ExecutionContext,
@@ -29,10 +31,13 @@ export class RolesGuard implements CanActivate {
       throw new ForbiddenException();
     }
 
-    // Your class guard looks for a singular .role property on the user object
-    const userRole = user.role;
+    const userRoles = user.roles ?? [];
 
-    if (requiredRoles.includes(userRole)) {
+    const hasRequiredRole = requiredRoles.some((role) =>
+      userRoles.includes(role),
+    );
+
+    if (hasRequiredRole) {
       return true;
     }
 
